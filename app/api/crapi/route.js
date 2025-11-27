@@ -1,10 +1,8 @@
 export async function GET() {
-  const baseUrl = process.env.BASE_URL;
-  const apiKey = process.env.API_KEY;
 
-  if (!baseUrl || !apiKey) {
-    return Response.json({ error: "Missing environment variables" }, { status: 500 });
-  }
+  // YOUR VALUES (Hard-coded — Not secure!)
+  const baseUrl = "http://147.135.212.197/crapi/had/";
+  const apiKey = "RVBYRTRSQkJhbWhdiHOFh19miXJohlVaSI2YhUZoZF1aZZZdYndW";
 
   try {
     const res = await fetch(baseUrl, {
@@ -16,7 +14,10 @@ export async function GET() {
     const data = await res.json();
     return Response.json(data);
 
-  } catch (err) {
-    return Response.json({ error: "Failed to fetch remote API", details: err.message }, { status: 500 });
+  } catch (error) {
+    return Response.json(
+      { error: "Remote API error", details: error.message },
+      { status: 500 }
+    );
   }
 }
